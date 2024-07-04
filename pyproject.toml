@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "embedding-test"
+version = "0.1.0"
+description = ""
+authors = ["Aljosha Koecher <aljosha.koecher@hsu-hh.de>"]
+readme = "README.md"
+packages = [{include = "embedding_test"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+python-dotenv = "^1.0.1"
+openai = "^1.35.10"
+numpy = "^2.0.0"
+pandas = "^2.2.2"
+openpyxl = "^3.1.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
