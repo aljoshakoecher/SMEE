@@ -17,7 +17,7 @@ client = openai.OpenAI(api_key=api_key)
 
 def embed_text(text):
     response = client.embeddings.create(
-        model="text-embedding-ada-002",
+        model="text-embedding-3-large",
         input=text
     )
     embedding = response.data[0].embedding
@@ -32,14 +32,14 @@ def cosine_similarity(vec1, vec2):
     return similarity
 
 # Run embedding and store in dict:
-# class_embeddings : Dict[str, List[float] ] = dict()
-# for class_definition in class_definitions:
-#     embedding = embed_text(class_definitions.get(class_definition))
-#     class_embeddings[class_definition] = embedding
+class_embeddings : Dict[str, List[float] ] = dict()
+for class_definition in class_definitions:
+    embedding = embed_text(class_definitions.get(class_definition))
+    class_embeddings[class_definition] = embedding
 
-# # Schreiben des Dictionaries in eine JSON-Datei
-# with open('data.json', 'w') as f:
-#     json.dump(class_embeddings, f)
+# Schreiben des Dictionaries in eine JSON-Datei
+with open('data.json', 'w') as f:
+    json.dump(class_embeddings, f)
 
 with open('data.json', 'r') as file:
     class_embeddings = json.load(file)
@@ -63,4 +63,4 @@ similarity_matrix.index = pd.Index([f"{list(class_embeddings.keys())[i]}" for i 
 print(similarity_matrix)
 
 # Schreiben des DataFrames in eine Excel-Datei
-similarity_matrix.to_excel('Beispiel_ada-2.xlsx', index=False, engine='openpyxl')
+similarity_matrix.to_excel('Beispiel_emb-large-3.xlsx', index=False, engine='openpyxl')
